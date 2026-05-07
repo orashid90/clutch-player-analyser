@@ -1,0 +1,5 @@
+git add .
+git commit -m "Short message describing change"
+git push
+
+python -m uvicorn app.main:app --reload

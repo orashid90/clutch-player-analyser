@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.player_score import calculate_player_total, leaderboard, player_events, comfort_clutch_ratio
+from app.player_score import calculate_player_total, leaderboard, player_events, player_clutch_profile, compare_players
 
 app = FastAPI()
 
@@ -25,11 +25,13 @@ def get_player_events(player_name: str):
 
 
 @app.get("/player/{player_name}/comfort_clutch")
-def get_comfort_clutch_ratio(player_name: str):
-    return comfort_clutch_ratio(player_name) 
+def get_player_clutch_profile(player_name: str):
+    return player_clutch_profile(player_name) 
     
 
-
+@app.get("/compare")
+def compare(player1: str, player2: str):
+    return compare_players(player1, player2)
 
 
 

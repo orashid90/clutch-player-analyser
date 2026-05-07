@@ -90,7 +90,7 @@ def player_events(player_name):
     }
 
 
-def comfort_clutch_ratio(player_name):
+def player_clutch_profile(player_name):
     player_data = player_events(player_name)
 
     events = player_data["events"]
@@ -112,27 +112,27 @@ def comfort_clutch_ratio(player_name):
         
         if score <= 3:
             comfort_events += 1
-        elif score < 7:
+        elif score <= 7:
             neutral_events += 1
         else:
             clutch_events += 1
 
     total_events = len(events)
-    ratio = round((comfort_events / total_events) * 100, 2)
+    comfort_ratio = round((comfort_events / total_events) * 100, 2)
 
-    if ratio >= 70:
+    if comfort_events > neutral_events and comfort_events > clutch_events:
         label = "Comfort Merchant"
         description = "Majority of goals in low-pressure situations"
-    elif ratio >= 40:
-        label = "Balanced"
-        description = "Mix of clutch and low-pressure goals"
-    else:
+    elif clutch_events > comfort_events and clutch_events > neutral_events:
         label = "Clutch Player"
         description = "Majority of goals are scored in high-pressure moments i.e. when it matters"
+    else:
+        label = "Balanced"
+        description = "Mix of clutch and low-pressure goals"
 
     return {
         "player": player_name,
-        "comfort_vs_clutch_ratio": ratio,
+        "comfort_ratio": comfort_ratio,
         "comfort_events": comfort_events,
         "clutch_events": clutch_events,
         "total_events": total_events,
@@ -140,4 +140,31 @@ def comfort_clutch_ratio(player_name):
         "description": description
     }
 
-  
+
+def compare_players(player1, player2):
+
+    player1_total = calculate_player_total(player1)
+    player2_total = calculate_player_total(player2)
+
+    player1_profile = player_clutch_profile(player1)
+    player2_profile = player_clutch_profile(player2)
+
+    player1_events = player_events(player1)
+    player2_events = player_events(player2)
+
+    return {
+        "player1": {
+            "name": player1,
+            "total_clutch_score": player1_total,
+            "average_clutch_score": player1_events["average_clutch_score"],
+            "best_moment": player1_events["best_moment"],
+            "clutch_profile": player1_profile
+        },
+        "player2": {
+            "name": player2,
+            "total_clutch_score": player2_total,
+            "average_clutch_score": player2_events["average_clutch_score"],
+            "best_moment": player2_events["best_moment"],
+            "clutch_profile": player2_profile
+        }
+    }
