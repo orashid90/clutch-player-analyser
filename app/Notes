@@ -4,3 +4,5 @@ git push
 
 Run Uvicorn: python -m uvicorn app.main:app --reload
 Exit Uvicorn: Ctrl C x2
+
+Run Streamlit: python -m streamlit run frontend/dashboard.p
