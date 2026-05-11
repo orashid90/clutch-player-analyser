@@ -5,4 +5,6 @@ git push
 Run Uvicorn: python -m uvicorn app.main:app --reload
 Exit Uvicorn: Ctrl C x2
 
-Run Streamlit: python -m streamlit run frontend/dashboard.p
+Run Streamlit: python -m streamlit run frontend/dashboard.py
+
+compare player url example = http://127.0.0.1:8000/compare?player1=Haaland&player2=Palmer
