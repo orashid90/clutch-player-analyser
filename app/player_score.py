@@ -63,10 +63,22 @@ def player_events(player_name):
                     int(row["minute"])
                 )
 
+                goal_difference = int(row["goal_difference_before_goal"])
+
+                if goal_difference == -1:
+                    moment_type = "Equaliser"
+
+                elif goal_difference == 0:
+                    moment_type = "To take the lead"
+
+                else:
+                    moment_type = "Goal"
+
                 event = {
                     "minute": int(row["minute"]),
                     "goal_difference_before_goal": int(row["goal_difference_before_goal"]),
-                    "clutch_score": score
+                    "clutch_score": score,
+                    "moment_type": moment_type
                 }
 
                 events.append(event)
@@ -79,6 +91,9 @@ def player_events(player_name):
     )
 
     best_moment = sorted_events[0] if sorted_events else None
+
+    print(sorted_events)
+    print(best_moment)
 
     return {
         "player": player_name,
@@ -99,6 +114,9 @@ def player_clutch_profile(player_name):
         return {
             "player": player_name,
             "comfort_ratio": 0,
+            "comfort_events": 0,
+            "clutch_events": 0,
+            "total_events": 0,
             "label": "No Data",
             "description": "No events available for this player"
         }
