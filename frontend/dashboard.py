@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+import pandas as pd
 
 st.title("⚽ Premier League Clutch Player Dashboard")
 
@@ -50,12 +51,26 @@ if st.button("Compare Players"):
             "Profile:",
             player1_data["profile"]["label"]
         )
+        
+        st.write("🔥 Best Moment")
+
+        st.write(
+            f"{player1_data['best_moment']['minute']}' "
+            f"{player1_data['best_moment']['moment_type']}"
+        )
+
+        st.caption(
+            f"Clutch Score: "
+            f"{player1_data['best_moment']['clutch_score']}"
+        )
 
         st.write(
             "Best Moment: ",
             f"{player1_data['best_moment']['minute']}'"
             f" - "
             f"{player1_data['best_moment']['moment_type']}"
+            f" - Clutch Score: "
+            f"{player1_data['best_moment']['clutch_score']}"
         )
 
     with col2: 
@@ -77,9 +92,28 @@ if st.button("Compare Players"):
             player2_data["profile"]["label"]
         )
 
+        st.write("🔥 Best Moment")
+
         st.write(
-            "Best Moment: ",
-            f"{player2_data['best_moment']['minute']}'"
-            f" - "
+            f"{player2_data['best_moment']['minute']}' "
             f"{player2_data['best_moment']['moment_type']}"
         )
+
+        st.caption(
+            f"Clutch Score: "
+            f"{player2_data['best_moment']['clutch_score']}"
+        )
+
+    chart_data = pd.DataFrame({
+        "Player": player_names,
+        "Clutch Rating": [
+            player1_data["clutch_rating"],
+            player2_data["clutch_rating"]
+        ]
+    })
+
+    st.subheader("Clutch Rating Comparison")
+
+    st.bar_chart(
+        chart_data.set_index("Player")
+    )
