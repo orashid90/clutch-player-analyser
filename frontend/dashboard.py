@@ -117,3 +117,29 @@ if st.button("Compare Players"):
     st.bar_chart(
         chart_data.set_index("Player")
     )
+
+    profile_data = pd.DataFrame({
+        "Event Type": [
+            "Comfort",
+            "Neutral",
+            "Clutch"
+        ],
+
+        player_names[0]: [
+            player1_data["profile"]["comfort_events"],
+            player1_data["profile"]["neutral_events"],
+            player1_data["profile"]["clutch_events"]
+        ],
+
+        player_names[1]: [
+            player2_data["profile"]["comfort_events"],
+            player2_data["profile"]["neutral_events"],
+            player2_data["profile"]["clutch_events"]
+        ]
+    })
+
+    st.subheader("Contribution Profile")
+
+    st.bar_chart(
+        profile_data.set_index("Event Type")
+    )

@@ -115,6 +115,7 @@ def player_clutch_profile(player_name):
             "player": player_name,
             "comfort_ratio": 0,
             "comfort_events": 0,
+            "neutral_events": 0,
             "clutch_events": 0,
             "total_events": 0,
             "label": "No Data",
@@ -152,6 +153,7 @@ def player_clutch_profile(player_name):
         "player": player_name,
         "comfort_ratio": comfort_ratio,
         "comfort_events": comfort_events,
+        "neutral_events": neutral_events,
         "clutch_events": clutch_events,
         "total_events": total_events,
         "label": label,
@@ -222,6 +224,8 @@ def compare_players(player1, player2):
                         player1_profile["comfort_ratio"],
                     "comfort_events":
                         player1_profile["comfort_events"],
+                    "neutral_events":
+                        player1_profile["neutral_events"],
                     "clutch_events":
                         player1_profile["clutch_events"]
                 }
@@ -243,6 +247,8 @@ def compare_players(player1, player2):
                         player2_profile["comfort_ratio"],
                     "comfort_events":
                         player2_profile["comfort_events"],
+                    "neutral_events":
+                        player2_profile["neutral_events"],
                     "clutch_events":
                         player2_profile["clutch_events"]
                 }
