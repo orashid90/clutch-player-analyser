@@ -227,7 +227,9 @@ def compare_players(player1, player2):
                     "neutral_events":
                         player1_profile["neutral_events"],
                     "clutch_events":
-                        player1_profile["clutch_events"]
+                        player1_profile["clutch_events"],
+                    "total_events":
+                        player1_profile["total_events"]
                 }
             },
 
@@ -250,7 +252,9 @@ def compare_players(player1, player2):
                     "neutral_events":
                         player2_profile["neutral_events"],
                     "clutch_events":
-                        player2_profile["clutch_events"]
+                        player2_profile["clutch_events"],
+                    "total_events":
+                        player2_profile["total_events"]
                 }
             }
         },

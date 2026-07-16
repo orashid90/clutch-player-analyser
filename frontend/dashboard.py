@@ -64,14 +64,26 @@ if st.button("Compare Players"):
             f"{player1_data['best_moment']['clutch_score']}"
         )
 
-        st.write(
-            "Best Moment: ",
-            f"{player1_data['best_moment']['minute']}'"
-            f" - "
-            f"{player1_data['best_moment']['moment_type']}"
-            f" - Clutch Score: "
-            f"{player1_data['best_moment']['clutch_score']}"
-        )
+
+        comfort = player1_data["profile"]["comfort_events"]
+
+        neutral = player1_data["profile"]["neutral_events"]
+
+        clutch = player1_data["profile"]["clutch_events"]
+
+        total = player1_data["profile"]["total_events"]
+
+        st.write(f"🟥 Comfort: {comfort}")
+
+        st.progress(comfort / total)
+
+        st.write(f"🟨 Neutral: {neutral}")
+
+        st.progress (neutral / total)
+
+        st.write(f"🟩 Clutch: {clutch}")
+
+        st.progress(clutch / total)
 
     with col2: 
 
@@ -104,6 +116,26 @@ if st.button("Compare Players"):
             f"{player2_data['best_moment']['clutch_score']}"
         )
 
+        comfort2 = player2_data["profile"]["comfort_events"]
+
+        neutral2 = player2_data["profile"]["neutral_events"]
+
+        clutch2 = player2_data["profile"]["clutch_events"]
+
+        total2 = player2_data["profile"]["total_events"]
+
+        st.write(f"🟥 Comfort: {comfort2}")
+
+        st.progress(comfort2 / total2)
+
+        st.write(f"🟨 Neutral: {neutral2}")
+
+        st.progress (neutral2 / total2)
+
+        st.write(f"🟩 Clutch: {clutch2}")
+
+        st.progress(clutch2 / total2)
+
     chart_data = pd.DataFrame({
         "Player": player_names,
         "Clutch Rating": [
@@ -116,30 +148,4 @@ if st.button("Compare Players"):
 
     st.bar_chart(
         chart_data.set_index("Player")
-    )
-
-    profile_data = pd.DataFrame({
-        "Event Type": [
-            "Comfort",
-            "Neutral",
-            "Clutch"
-        ],
-
-        player_names[0]: [
-            player1_data["profile"]["comfort_events"],
-            player1_data["profile"]["neutral_events"],
-            player1_data["profile"]["clutch_events"]
-        ],
-
-        player_names[1]: [
-            player2_data["profile"]["comfort_events"],
-            player2_data["profile"]["neutral_events"],
-            player2_data["profile"]["clutch_events"]
-        ]
-    })
-
-    st.subheader("Contribution Profile")
-
-    st.bar_chart(
-        profile_data.set_index("Event Type")
     )
